@@ -14,6 +14,8 @@ namespace Solucion_Lab_21_abril
             MailSender mailSender = new MailSender();
             SMSSender smsSender = new SMSSender();
 
+            User user = new User();
+
 
             //Suscribir los que escuchan los eventos
             // Notar que para poder realizar las suscripciones es necesario tener instancias de las clases, y que los parametros
@@ -24,6 +26,10 @@ namespace Solucion_Lab_21_abril
             server.PasswordChanged += mailSender.OnPasswordChanged;
             //3- Suscribir OnCambiadaContrasena de smsSender para que escuche el evento CambiadaContrasena enviado por servidor
             server.PasswordChanged += smsSender.OnPasswordChanged;
+
+            mailSender.Emailsent += user.OnEmailSent;
+            user.EmailVerified += server.OnEmailVerified;
+
 
 
             // Controla la ejecucion mientras el usuario no quiera salir
